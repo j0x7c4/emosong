@@ -213,6 +213,11 @@ def get_channel():
 def close():
     return render_template('close.html')
 
+@app.route('/status.html', methods=['GET', 'POST'])
+def get_status():
+    statuses = fb_call('me/statuses')
+    return render_template('channel.html',statuses=statuses)
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
     if app.config.get('FB_APP_ID') and app.config.get('FB_APP_SECRET'):

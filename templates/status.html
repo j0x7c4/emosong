@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block topbar %}
+
+  <!-- By passing a valid access token here, we are able to display -->
+  <!-- the user's images without having to download or prepare -->
+  <!-- them ahead of time -->
+<ul>
+  {% for status in statuses.data %}
+  <li>{{status.message}}</li>
+  {% endfor %}
+</ul>
+{% endblock%}
