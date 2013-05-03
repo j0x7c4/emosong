@@ -215,8 +215,16 @@ def close():
 
 @app.route('/status.html', methods=['GET', 'POST'])
 def get_status():
-    statuses = fb_call('me/statuses', args={'access_token': access_token, 'limit': 4})
-    return render_template('channel.html',statuses=statuses)
+    access_token = get_token()
+    channel_url = url_for('get_channel', _external=True)
+    channel_url = channel_url.replace('http:', '').replace('https:', '')
+    
+    if access_token:
+        statuses = fb_call('me/statuses', args={'access_token': access_token, 'limit': 4})
+        return render_template('channel.html',statuses=statuses)
+    else:
+        return render_template('login.html', app_id=FB_APP_ID, token=access_token, url=request.url, channel_url=channel_url, name=FB_APP_NAME)
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))
