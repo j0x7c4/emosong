@@ -215,7 +215,7 @@ def close():
 
 @app.route('/status.html', methods=['GET', 'POST'])
 def get_status():
-    statuses = fb_call('me/statuses')
+    statuses = fb_call('me/statuses', args={'access_token': access_token, 'limit': 4})
     return render_template('channel.html',statuses=statuses)
 
 if __name__ == '__main__':
