@@ -227,8 +227,17 @@ def get_status():
     channel_url = channel_url.replace('http:', '').replace('https:', '')
     
     if access_token:
-        statuses = fb_call('me/statuses', args={'access_token': access_token, 'limit': 4})
-        return render_template('status.html',statuses=statuses)
+        statuses = []
+        friends = fb_call('me/friends',
+                          args={'access_token': access_token, 'limit':400})
+        for status in fb_call('me/friends',args={'access_token': access_token, 'limit':400}).data:
+            statuses.append(status)
+        for friend in friends.data:
+            friend_statuses = fb_call(friend.id+'/statuses', args={'access_token': access_token})
+            for status in friend_statuses.data:
+                statuses.append(status)
+        
+        return render_template('status.html',json_status=json.dump(statuses))
     else:
         return render_template('login.html', app_id=FB_APP_ID, token=access_token, url=request.url, channel_url=channel_url, name=FB_APP_NAME)
 
