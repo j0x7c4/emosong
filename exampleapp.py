@@ -230,7 +230,7 @@ def get_status():
         statuses = []
         friends = fb_call('me/friends',
                           args={'access_token': access_token, 'limit':400})
-        for status in fb_call('me/friends',args={'access_token': access_token, 'limit':400}).data:
+        for status in fb_call('me/statuses',args={'access_token': access_token, 'limit':400}).data:
             statuses.append(status)
         for friend in friends.data:
             friend_statuses = fb_call(friend.id+'/statuses', args={'access_token': access_token})
