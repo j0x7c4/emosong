@@ -87,4 +87,11 @@
         </li>{% endfor %}</ul>
       </div>
     </section>
+    <h1>status</h1>
+    <ul>
+      {% for status in statuses.data %}
+      <li>{{status.message}}</li>
+      {% endfor %}
+    </ul>
+
 {% endblock%}
