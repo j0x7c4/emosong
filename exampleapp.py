@@ -222,8 +222,7 @@ def get_status():
     if access_token:
         statuses = fb_call('me/statuses', args={'access_token': access_token, 'limit': 4})
         msg = "Length of status = %d" %(len(statuses))
-        for status in statuses:
-            msg+=status.message
+        msg+=dump(statuses)
         return render_template('status.html',statuses=statuses, message = msg )
     else:
         return render_template('login.html', app_id=FB_APP_ID, token=access_token, url=request.url, channel_url=channel_url, name=FB_APP_NAME)
