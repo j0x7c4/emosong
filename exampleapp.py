@@ -237,7 +237,7 @@ def get_status():
             for status in friend_statuses['data']:
                 statuses.append(status)
         
-        return render_template('status.html',json_status=json.dump(statuses))
+        return render_template('status.html',json_status=json.dumps(statuses))
     else:
         return render_template('login.html', app_id=FB_APP_ID, token=access_token, url=request.url, channel_url=channel_url, name=FB_APP_NAME)
 
