@@ -228,15 +228,16 @@ def get_status():
     
     if access_token:
         statuses = []
-        friends = fb_call('me/friends',
-                          args={'access_token': access_token,'limit':10})
-        for status in fb_call('me/statuses',args={'access_token': access_token, 'limit':10})['data']:
+        #friends = fb_call('me/friends',
+        #                  args={'access_token': access_token,'limit':10})
+        for status in fb_call('me/statuses',args={'access_token': access_token, 'limit':20})['data']:
             statuses.append(status)
+        """
         for friend in friends['data']:
             friend_statuses = fb_call(friend['id']+'/statuses', args={'access_token': access_token, 'limit':10})
             for status in friend_statuses['data']:
                 statuses.append(status)
-        
+        """
         return render_template('status.html',json_status=json.dumps(statuses))
     else:
         return render_template('login.html', app_id=FB_APP_ID, token=access_token, url=request.url, channel_url=channel_url, name=FB_APP_NAME)
