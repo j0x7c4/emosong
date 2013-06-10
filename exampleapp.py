@@ -6,6 +6,7 @@ import os.path
 import urllib
 import hmac
 import json
+import vsm
 import hashlib
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 
@@ -219,6 +220,15 @@ def get_channel():
 @app.route('/close/', methods=['GET', 'POST'])
 def close():
     return render_template('close.html')
+
+@app.route('/query/', methods=['GET', 'POST'])
+def query():
+    url="http://140.112.91.193:12011/solr"
+    vsm = VSM(url)
+    text = """作詞：天天作曲：李偲菘我翻開書　突然變立體飛了進去　穿越過時空滿街人群戴上了耳機　頻道的聲音震撼了我　這就是海頓四季交響曲古老的奏鳴又有個人　頭髮捲又長他是牛頓　蘋果落地是地球吸引千年的定律　他要去挑釁不斷證明　顛覆後成了地球的引力千萬分機率　我經歷了奇境　還交錯了古今瞬間　飛起　我的心　隨海頓牛頓遲鈍的自己海頓的旋律　牛頓的引力地心的重音　無法去抗拒跳回出發地　書本在手裡興奮和莫名　無言的動力海頓的奏鳴　牛頓的發明轉載來自 ※ Mojim.com　魔鏡歌詞網 遲鈍的自己　還有股衝勁海頓的旋律　牛頓的引力遲鈍的自己　穿越了古今　我在天上飛我問海頓　音樂太著迷他點了頭　卻偏要牛頓回答奧秘我站起身來　再穿牆過壁憑著念力　擠到另一個不同的世紀只要你願意　愛有穿透力　古今能交集我們的旋律　海頓的旋律　牛頓的引力地心的重音　無法去抗拒跳回出發地　書本在手裡興奮和莫名　無言的動力海頓的奏鳴　牛頓的發明遲鈍的自己　還有股衝勁海頓的旋律　牛頓的引力遲鈍的自己　穿越了古今我在天上飛　天上飛　天上飛"""
+    rank = vsm.query(text)
+    return render_template('query.html',rank=json.dumps(rank))
+
 
 @app.route('/status.html', methods=['GET', 'POST'])
 def get_status():
