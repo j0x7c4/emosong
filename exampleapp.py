@@ -6,7 +6,7 @@ import os.path
 import urllib
 import hmac
 import json
-import vsm
+from vsm import *
 import hashlib
 from base64 import urlsafe_b64decode, urlsafe_b64encode
 
