@@ -16,7 +16,7 @@ if __name__ == "__main__":
 				tmp = tmp[1].split(' ')
 				label = tmp[0]
 				title = tmp[1]
-				content = open("%s/%s"%(dir_path,sid)).read()
+				content = open("%s/%d"%(dir_path,int(sid)-40)).read()
 				#print label
 				s.add(id=sid, title=unicode(title,'utf-8'), content=unicode(content,'utf-8'), emotion=label)
 				s.commit()
