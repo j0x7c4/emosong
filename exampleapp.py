@@ -221,7 +221,7 @@ def get_channel():
 def close():
     return render_template('close.html')
 
-@app.route('/query/', methods=['POST'])
+@app.route('/query/', methods=['GET','POST'])
 def query():
     url="http://140.112.91.193:12011/solr"
     vsm = VSM(url)
