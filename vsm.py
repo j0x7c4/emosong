@@ -20,8 +20,8 @@ class VSM:
 			temp_terms.update({term_text:temp_term_list[idx+1]})
 
 		sorted_terms = sorted(temp_terms.items(), key=lambda temp_terms:temp_terms[1], reverse=True)
-		self.terms = [x[0] for x in sorted_terms[0:int(len(sorted_terms)*0.1)]]
-		self.df = [x[1] for x in sorted_terms[0:int(len(sorted_terms)*0.1)]]
+		self.terms = [x[0] for x in sorted_terms[0:int(len(sorted_terms)*0.05)]]
+		self.df = [x[1] for x in sorted_terms[0:int(len(sorted_terms)*0.05)]]
 		#print self.terms
 		#print self.df
 		for idx in range(len(self.terms)):
@@ -137,12 +137,14 @@ class VSM:
 				{'tids':test_vector['tids'],'value':test_vector['weights']})
 			rank.update({title:score})
 		print rank
+		"""
 		sorted_rank_keys = sorted(rank.items(), key=lambda rank:rank[1], reverse=True)
 		sorted_rank = {}
 		for key in sorted_rank_keys:
 			sorted_rank.update({key[0]:key[1]})
 		print len(sorted_rank)
-		return sorted_rank
+		"""
+		return rank
 
 
 	
@@ -156,7 +158,5 @@ if __name__=="__main__":
 	text = """作詞：天天作曲：李偲菘我翻開書　突然變立體飛了進去　穿越過時空滿街人群戴上了耳機　頻道的聲音震撼了我　這就是海頓四季交響曲古老的奏鳴又有個人　頭髮捲又長他是牛頓　蘋果落地是地球吸引千年的定律　他要去挑釁不斷證明　顛覆後成了地球的引力千萬分機率　我經歷了奇境　還交錯了古今瞬間　飛起　我的心　隨海頓牛頓遲鈍的自己海頓的旋律　牛頓的引力地心的重音　無法去抗拒跳回出發地　書本在手裡興奮和莫名　無言的動力海頓的奏鳴　牛頓的發明轉載來自 ※ Mojim.com　魔鏡歌詞網 遲鈍的自己　還有股衝勁海頓的旋律　牛頓的引力遲鈍的自己　穿越了古今　我在天上飛我問海頓　音樂太著迷他點了頭　卻偏要牛頓回答奧秘我站起身來　再穿牆過壁憑著念力　擠到另一個不同的世紀只要你願意　愛有穿透力　古今能交集我們的旋律　海頓的旋律　牛頓的引力地心的重音　無法去抗拒跳回出發地　書本在手裡興奮和莫名　無言的動力海頓的奏鳴　牛頓的發明遲鈍的自己　還有股衝勁海頓的旋律　牛頓的引力遲鈍的自己　穿越了古今我在天上飛　天上飛　天上飛"""
 	#text = """我翻開書　突然變立體飛了進去　穿越過時空滿街人群戴上了耳機　頻道的聲音震撼了我 """
 	rank = vsm.query(text)
-	print rank
-
 
 	
