@@ -96,6 +96,7 @@ class VSM:
 			tvs = j["termVectors"][2:]
 			for term in self.get_vectors(docs,tvs,start):
 				all_vectors.append(term)
+		print len(all_vectors)
 		return all_vectors
 	def get_score( self, v1,v2 ):
 		N = len(v1)
@@ -135,7 +136,7 @@ class VSM:
 			score = self.get_score({'tids':sample['tids'],'value':sample['weights']},
 				{'tids':test_vector['tids'],'value':test_vector['weights']})
 			rank.update({title:score})
-
+		print rank
 		sorted_rank_keys = sorted(rank.items(), key=lambda rank:rank[1], reverse=True)
 		sorted_rank = {}
 		for key in sorted_rank_keys:
