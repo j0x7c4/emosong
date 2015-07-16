@@ -99,11 +99,12 @@ class VSM:
 		print len(all_vectors)
 		return all_vectors
 	def get_score( self, v1,v2 ):
-		N = len(v1)
+		N1 = len(v1['tids'])
+		N2 = len(v2['tids'])
 		i = j = 0
 		score = 0 
 		nv1 = nv2 = 0
-		while i<N and j<N:
+		while i<N1 and j<N2:
 			if v1['tids'][i]==v2['tids'][j]:
 				score+=v1['value'][i]*v2['value'][j]
 				nv1 += v1['value'][i]*v1['value'][i]
@@ -117,10 +118,10 @@ class VSM:
 				nv2 += v2['value'][j]*v2['value'][j]
 				j+=1
 
-		while i<N :
+		while i<N1 :
 			nv1 += v1['value'][i]*v1['value'][i]
 			i+=1
-		while j<N :
+		while j<N2 :
 			nv2 += v2['value'][j]*v2['value'][j]
 			j+=1
 
@@ -136,15 +137,16 @@ class VSM:
 			score = self.get_score({'tids':sample['tids'],'value':sample['weights']},
 				{'tids':test_vector['tids'],'value':test_vector['weights']})
 			rank.update({title:score})
-		print rank
-		"""
+		
 		sorted_rank_keys = sorted(rank.items(), key=lambda rank:rank[1], reverse=True)
-		sorted_rank = {}
+		sorted_rank = []
 		for key in sorted_rank_keys:
-			sorted_rank.update({key[0]:key[1]})
+			print key
+			sorted_rank.append((key[0],key[1]))
 		print len(sorted_rank)
-		"""
-		return rank
+		print sorted_rank
+		
+		return sorted_rank
 
 
 	
